@@ -1,23 +1,33 @@
+import { RouterModule } from '@angular/router';
 import { ContactService } from './contact.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PhonebookComponent } from './phonebook/phonebook.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ContactComponent } from './contact/contact.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ContactsListComponent } from './contacts-list/contacts-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PhonebookComponent
+    ContactComponent,
+    ContactsListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    FormsModule,
+    HttpClientModule,
+    RouterModule.forRoot([
+      {path:'',component:ContactsListComponent},
+      {path:'contact/create',component:ContactComponent},
+      {path:'contact/edit/:id',component:ContactComponent},
+      {path:'**',component:ContactsListComponent}
+    ])
   ],
   providers: [ContactService],
   bootstrap: [AppComponent]
