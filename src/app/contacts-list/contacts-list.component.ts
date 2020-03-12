@@ -1,3 +1,4 @@
+import { ContactherokuService } from './../contactheroku.service';
 import { ContactService } from './../contact.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -14,11 +15,12 @@ export class ContactsListComponent implements OnInit,OnDestroy {
 
   suscription: Subscription;
 
-  constructor(private contactService: ContactService) { }
+  constructor(private contactService: ContactService,
+    private contactherokuService: ContactherokuService) { }
 
   ngOnInit(): void {
 
-    this.suscription = this.contactService.getAllContacts().subscribe( contacts=> this.contacts = contacts);
+    this.suscription = this.contactherokuService.getAllContacts().subscribe( contacts=> this.contacts = contacts);
   }
 
   ngOnDestroy():void{

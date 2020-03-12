@@ -1,9 +1,10 @@
+import { ContactherokuService } from './../contactheroku.service';
 import { ContactService } from './../contact.service';
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {take} from 'rxjs/operators';
-import { Contact } from '../Models/contact';
+
 
 
 @Component({
@@ -24,6 +25,7 @@ export class ContactComponent implements OnInit {
 
   constructor(
     private contactService: ContactService,
+    private contactHerokuService: ContactherokuService,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -53,8 +55,8 @@ export class ContactComponent implements OnInit {
   
   save(contact){
 
-   if(this.id) this.contactService.updateContact(this.id,contact).pipe(take(1)).subscribe(response => response);
-   else this.contactService.addContact(contact).pipe(take(1)).subscribe(response => response);
+   if(this.id) this.contactHerokuService.updateContact(this.id,contact).pipe(take(1)).subscribe(response => response);
+   else this.contactHerokuService.addContact(contact).pipe(take(1)).subscribe(response => response);
 
 
   this.router.navigate(['/']);
@@ -65,7 +67,7 @@ export class ContactComponent implements OnInit {
 
     if(!confirm('Are you sure you want to delete this contact?'))return;
 
-      this.contactService.deleteContact(this.id).pipe(take(1)).subscribe(response => response);
+      this.contactHerokuService.deleteContact(this.id).pipe(take(1)).subscribe(response => response);
 
       this.router.navigate(['/']);
 
