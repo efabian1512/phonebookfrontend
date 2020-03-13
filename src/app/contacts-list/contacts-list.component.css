@@ -4,9 +4,16 @@ table{
 
 .customizelink{
     margin-top:20px;
+    margin-bottom:20px;
   
 }
 
 h1{
     margin-top: 20px;
+}
+
+.customizing{
+    margin-top:100px;
+    font-size: 40px;
+    text-align: center;
 }

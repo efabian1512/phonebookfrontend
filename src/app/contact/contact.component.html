@@ -26,12 +26,32 @@
             <div *ngIf="email.errors.email">The email is not valid.</div>
         </div>
     </div>
-    <div>
+<div class="clickable">
+    <span  (click)="addingAddress()">Add an address  <i class="fas" [class.fa-chevron-right]="!addAddress" [class.fa-chevron-down]="addAddress"></i></span>
+</div>
+    
+
+    <div *ngIf="addAddress"> 
+        <div class="form-gropup">
+            <label for="address">Address</label>
+            <input formControlName="address" type="text" id="address" class="form-control" placeholder="Street., Apt.,bldg.">
+        </div>
+        <div class="form-gropup">
+            <label for="city">City</label>
+            <input formControlName="city" type="text" id="city" class="form-control">
+        </div>
+        <div class="form-gropup">
+            <label for="country">Country</label>
+            <input formControlName="country" type="text" id="street" class="form-control">
+        </div>
+    </div>
+    
+
         <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Save</button>
         <button *ngIf="id" type="button" class="btn btn-danger" (click)="delete()">Delete</button>
         <a routerLink="/" class="float-right customizeLink">Cancel</a>
         
-    </div>
+    
    
 </form>
 

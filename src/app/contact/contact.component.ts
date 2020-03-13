@@ -16,11 +16,15 @@ export class ContactComponent implements OnInit {
 
   contact:any={};
   id;
+  addAddress = false;
   form = new FormGroup({
     
     name: new FormControl('',Validators.required),
     telephone: new FormControl('',Validators.required),
-    email: new FormControl('',Validators.email)
+    email: new FormControl('',Validators.email),
+    address: new FormControl(),
+    city: new FormControl(),
+    country: new FormControl()
   });
 
   constructor(
@@ -44,6 +48,9 @@ export class ContactComponent implements OnInit {
           this.name.setValue(this.contact.name);
           this.telephone.setValue(this.contact.telephone);
           this.email.setValue(this.contact.email); 
+          this.address.setValue(this.contact.address);
+          this.city.setValue(this.contact.city);
+          this.country.setValue(this.contact.country); 
         
         });
       
@@ -55,8 +62,8 @@ export class ContactComponent implements OnInit {
   
   save(contact){
 
-   if(this.id) this.contactHerokuService.updateContact(this.id,contact).pipe(take(1)).subscribe(response => response);
-   else this.contactHerokuService.addContact(contact).pipe(take(1)).subscribe(response => response);
+   if(this.id) this.contactService.updateContact(this.id,contact).pipe(take(1)).subscribe(response => response);
+   else this.contactService.addContact(contact).pipe(take(1)).subscribe(response => response);
 
 
   this.router.navigate(['/']);
@@ -67,10 +74,14 @@ export class ContactComponent implements OnInit {
 
     if(!confirm('Are you sure you want to delete this contact?'))return;
 
-      this.contactHerokuService.deleteContact(this.id).pipe(take(1)).subscribe(response => response);
+      this.contactService.deleteContact(this.id).pipe(take(1)).subscribe(response => response);
 
       this.router.navigate(['/']);
 
+   }
+
+   addingAddress(){
+      this.addAddress = !this.addAddress;
    }
 
   
@@ -85,6 +96,17 @@ export class ContactComponent implements OnInit {
 
   get email(){
     return this.form.get('email');
+  }
+  get address (){
+    return this.form.get('address');
+  }
+
+  get city(){
+    return this.form.get('city');
+  }
+
+  get country(){
+    return this.form.get('country');
   }
 
 

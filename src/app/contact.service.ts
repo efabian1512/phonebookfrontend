@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Contact } from './Models/contact';
-import { take, map } from 'rxjs/operators';
+import { take, map, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
  
-  private url="/api/v1/contact/";
+  private url="/api/phonebook/contact/";
+  private _refresh = new Subject<void>();
+
   constructor(private http: HttpClient) { }
 
 
   getAllContacts(){
     return this.http.get<Contact[]>(this.url);
+    
   }
 
   getContactById(id:string){
@@ -23,20 +26,33 @@ export class ContactService {
 
   addContact(contact){
     
-     return this.http.post(this.url,contact);
+     return this.http.post(this.url,contact).pipe(
+      tap(()=>{
+        this._refresh.next();
+      }));;
     
   }
 
   updateContact(id:string,contact){
   
-      return this.http.put(this.url +id,contact);
+      return this.http.put(this.url +id,contact).pipe(
+        tap(()=>{
+          this._refresh.next();
+        }));;
 
   }
 
   deleteContact(id:string){
 
-       return this.http.delete(this.url +id);
+       return this.http.delete(this.url +id).pipe(
+        tap(()=>{
+          this._refresh.next();
+        }));;
     
 
+  }
+
+  get refresh(){
+    return this._refresh;
   }
 }

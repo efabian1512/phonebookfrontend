@@ -1,11 +1,8 @@
 {
-    "/api/v1/*":{
+    "/api/phonebook/*":{
         "target":"http://localhost:9090",
         "secure":false,
-        "changeOrigin":true
-       
-
-        
+        "changeOrigin":true   
     }
 
 
