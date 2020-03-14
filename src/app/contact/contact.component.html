@@ -27,8 +27,17 @@
         </div>
     </div>
 <div class="clickable">
-    <span  (click)="addingAddress()">Add an address  <i class="fas" [class.fa-chevron-right]="!addAddress" [class.fa-chevron-down]="addAddress"></i></span>
+    <span *ngIf="!contact.address && !contact.city && !contact.country;else updateAddress" (click)="addingAddress()">
+        Add an address  <i class="fas" [class.fa-chevron-right]="!addAddress" [class.fa-chevron-down]="addAddress"></i></span>
+
+<ng-template #updateAddress>
+  
+        <span (click)="addingAddress()">
+            Upddate address  <i class="fas" [class.fa-chevron-right]="!addAddress" [class.fa-chevron-down]="addAddress"></i></span>
+</ng-template>
 </div>
+
+
     
 
     <div *ngIf="addAddress"> 

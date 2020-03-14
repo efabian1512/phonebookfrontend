@@ -24,10 +24,10 @@ export class ContactsListComponent implements OnInit/*OnDestroy*/{
 
   ngOnInit(): void {
     
-    this.contactService.refresh
+    /*this.contactService.refresh
     .subscribe(()=>{
        this.getAllContacts();
-    });
+    });*/
    
     this.getAllContacts();
     

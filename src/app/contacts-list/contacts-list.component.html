@@ -22,6 +22,7 @@
             <th>Telephone</th>
             <th>Email</th>
             <th>Address</th>
+            <th></th>
         </tr>
        
     </thead>
@@ -29,8 +30,12 @@
        <tr *ngFor="let contact of filteredContacts">
            <td>{{contact.name}}</td>
            <td>{{contact.telephone}}</td>
-           <td>{{contact.email || "-"}}</td>
-           <td>{{contact.address + contact.city + contact.country  || "-"}}</td>
+           <td>{{contact.email}}</td>
+           <td>
+            <span *ngIf="contact.address;else dash">{{contact.address}}, </span><br/>
+            <span *ngIf="contact.city || contact.country">{{contact.city +", "+ contact.country}}.</span>
+            <ng-template #dash>--</ng-template>
+          </td>
            <td><a [routerLink]="['contact/edit',contact.id]">Edit</a></td>
        </tr>
     </tbody>

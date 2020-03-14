@@ -29,7 +29,7 @@ export class ContactService {
      return this.http.post(this.url,contact).pipe(
       tap(()=>{
         this._refresh.next();
-      }));;
+      }));
     
   }
 
@@ -38,7 +38,7 @@ export class ContactService {
       return this.http.put(this.url +id,contact).pipe(
         tap(()=>{
           this._refresh.next();
-        }));;
+        }));
 
   }
 
@@ -47,7 +47,7 @@ export class ContactService {
        return this.http.delete(this.url +id).pipe(
         tap(()=>{
           this._refresh.next();
-        }));;
+        }));
     
 
   }
