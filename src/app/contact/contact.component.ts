@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {take} from 'rxjs/operators';
+import { AppError } from '../common/app-error';
+import { NotFoundError } from '../common/not-found-error';
+import { BadInput } from '../common/bad-input';
 
 
 
@@ -43,27 +46,41 @@ export class ContactComponent implements OnInit {
  
 
     if(this.id)
-      this.contactService.getContactById(this.id).pipe(take(1)).subscribe(contact => 
-        {this.contact = contact;
+      this.contactService.getContactById(this.id).pipe(take(1))
+      .subscribe(
+        contact => {
+          this.contact = contact;
           this.name.setValue(this.contact.name);
           this.telephone.setValue(this.contact.telephone);
           this.email.setValue(this.contact.email); 
           this.address.setValue(this.contact.address);
           this.city.setValue(this.contact.city);
           this.country.setValue(this.contact.country); 
-        
-        });
-      
-      
-
-   
+          });
     }
 
   
   save(contact){
 
-   if(this.id) this.contactService.updateContact(this.id,contact).pipe(take(1)).subscribe(response => response);
-   else this.contactService.addContact(contact).pipe(take(1)).subscribe(response => response);
+   if(this.id) this.contactService.updateContact(this.id,contact).pipe(take(1))
+   .subscribe(
+     response => {
+       response
+      },
+     (error: AppError) =>{
+      if(error instanceof BadInput){
+        this.form.setErrors(error);
+      }
+      else throw error;
+    });
+
+   else this.contactService.addContact(contact).pipe(take(1)).subscribe(response => {response},
+    (error: AppError) =>{
+      if(error instanceof BadInput)
+        this.form.setErrors(error.originalError);
+      
+      else throw error;
+      });
 
 
   this.router.navigate(['/']);
@@ -74,7 +91,18 @@ export class ContactComponent implements OnInit {
 
     if(!confirm('Are you sure you want to delete this contact?'))return;
 
-      this.contactService.deleteContact(this.id).pipe(take(1)).subscribe(response => response);
+      this.contactService.deleteContact(this.id).pipe(take(1))
+      .subscribe(
+        response => {
+          response
+        },
+        (error: AppError) =>{
+          if(error instanceof NotFoundError)
+            alert("This post has already been deleted.");
+          
+          else throw error;
+          
+        });
 
       this.router.navigate(['/']);
 

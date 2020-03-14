@@ -17,6 +17,14 @@ export class ContactsListComponent implements OnInit/*OnDestroy*/{
   filteredContacts:Contact[]=[];
 
   suscription: Subscription;
+   
+  public page: Number = 1; //Número de página en la que estamos. Será 1 la primera vez que se carga el componente
+ 
+  public totalPages: Number; //Número total de páginas
+ 
+  public numShops: number; //Total de tiendas existentes
+ 
+  private numResults: number = 10;
 
   constructor(private contactService: ContactService,
     private contactherokuService: ContactherokuService,
@@ -24,10 +32,10 @@ export class ContactsListComponent implements OnInit/*OnDestroy*/{
 
   ngOnInit(): void {
     
-    /*this.contactService.refresh
+    this.contactService.refresh
     .subscribe(()=>{
        this.getAllContacts();
-    });*/
+    });
    
     this.getAllContacts();
     
@@ -36,7 +44,11 @@ export class ContactsListComponent implements OnInit/*OnDestroy*/{
   }
 
   private getAllContacts(){
-    this.suscription = this.contactService.getAllContacts().subscribe( contacts=> this.filteredContacts= this.contacts = contacts);
+    this.suscription = this.contactService.getAllContacts()
+    .subscribe( 
+      contacts=> {
+        this.filteredContacts= this.contacts = contacts;
+        });
   }
 
  /* ngOnDestroy():void{
