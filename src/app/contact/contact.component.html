@@ -14,7 +14,7 @@
     </div>
     <div class="form-gropup">
         <label for="telephone">Phone number:</label>
-        <input formControlName="telephone" type="tel"  id="telephone" class="form-control">
+        <input formControlName="telephone" type="number"  id="telephone" class="form-control">
         <div *ngIf="telephone.invalid && telephone.touched" class="alert alert-danger">
           <div *ngIf="telephone.errors.required"> The phone number is required.</div>
         </div>
