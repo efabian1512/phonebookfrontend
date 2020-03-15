@@ -29,8 +29,9 @@ import { AppErrorHandler } from './common/app-error-handler';
       {path:'',component:ContactsListComponent},
       {path:'contact/create',component:ContactComponent},
       {path:'contact/edit/:id',component:ContactComponent},
-      {path:'**',component:ContactsListComponent}
-    ])
+      {path:'**',component:ContactsListComponent},
+     
+    ], {useHash:true})
   ],
   providers: [
     ContactService,
