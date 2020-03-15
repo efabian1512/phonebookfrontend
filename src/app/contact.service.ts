@@ -14,7 +14,7 @@ import { BadInput } from './common/bad-input';
 })
 export class ContactService {
  
-  private url="/api/phonebook/contact/";
+  private url="/";
   private _refresh = new Subject<void>();
 
   constructor(private http: HttpClient) { }
