@@ -1,4 +1,3 @@
-import { ContactherokuService } from './../contactheroku.service';
 import { ContactService } from './../contact.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -26,9 +25,7 @@ export class ContactsListComponent implements OnInit/*OnDestroy*/{
  
   private numResults: number = 10;
 
-  constructor(private contactService: ContactService,
-    private contactherokuService: ContactherokuService,
-    private router: Router) { }
+  constructor(private contactService: ContactService) { }
 
   ngOnInit(): void {
     
@@ -51,9 +48,6 @@ export class ContactsListComponent implements OnInit/*OnDestroy*/{
         });
   }
 
- /* ngOnDestroy():void{
-    this.suscription.unsubscribe();
-  }*/
 
   filter(query: string){
     this.filteredContacts = (query) ?
