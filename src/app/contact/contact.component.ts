@@ -1,4 +1,3 @@
-import { ContactherokuService } from './../contactheroku.service';
 import { ContactService } from './../contact.service';
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
@@ -32,7 +31,6 @@ export class ContactComponent implements OnInit {
 
   constructor(
     private contactService: ContactService,
-    private contactHerokuService: ContactherokuService,
     private route: ActivatedRoute,
     private router: Router) { }
 

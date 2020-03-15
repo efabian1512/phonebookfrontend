@@ -2,7 +2,7 @@ import { ContactService } from './../contact.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Contact } from '../Models/contact';
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'contacts-list',
