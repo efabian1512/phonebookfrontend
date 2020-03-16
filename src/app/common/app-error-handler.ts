@@ -3,7 +3,14 @@ import { ErrorHandler } from '@angular/core';
 export class AppErrorHandler implements ErrorHandler{
     handleError(error){
 
-        alert('An unexpected error has occurred.');
+        if(error.status ===500){
+            alert('Contact not found.');
+        }else{
+            alert('An unexpected error has occurred.');
         console.log(error);
+
+        }
+
+       
     }
 }
