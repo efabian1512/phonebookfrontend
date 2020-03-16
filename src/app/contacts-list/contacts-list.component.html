@@ -33,8 +33,9 @@
            <td>{{contact.email}}</td>
            <td>
             <span *ngIf="contact.address;else dash">{{contact.address}}, </span><br/>
-            <span *ngIf="contact.city || contact.country">{{contact.city +", "+ contact.country}}.</span>
+            <span *ngIf="contact.city || contact.country">{{contact.city}}, {{contact.country}}.</span>
             <ng-template #dash>--</ng-template>
+
           </td>
            <td><a [routerLink]="['contact/edit',contact.id]">Edit</a></td>
        </tr>
