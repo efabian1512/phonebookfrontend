@@ -8,6 +8,7 @@ export class AppErrorHandler implements ErrorHandler{
         }else{
             alert('An unexpected error has occurred.');
             console.log(JSON.stringify(error));
+            
         }
         
 
