@@ -17,14 +17,6 @@ export class ContactsListComponent implements OnInit/*OnDestroy*/{
 
   suscription: Subscription;
    
-  public page: Number = 1; //Número de página en la que estamos. Será 1 la primera vez que se carga el componente
- 
-  public totalPages: Number; //Número total de páginas
- 
-  public numShops: number; //Total de tiendas existentes
- 
-  private numResults: number = 10;
-
   constructor(private contactService: ContactService) { }
 
   ngOnInit(): void {
