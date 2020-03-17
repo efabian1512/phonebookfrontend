@@ -9,7 +9,7 @@ import { Contact } from '../Models/contact';
   templateUrl: './contacts-list.component.html',
   styleUrls: ['./contacts-list.component.css']
 })
-export class ContactsListComponent implements OnInit/*OnDestroy*/{
+export class ContactsListComponent implements OnInit{
 
   contacts:Contact[]=[];
 
